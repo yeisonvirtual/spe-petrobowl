@@ -1,2 +1,2 @@
 # spe-petrobowl
-Programa de pregunta para la selección del equipo nacional
+Programa de preguntas para la selección del equipo nacional
