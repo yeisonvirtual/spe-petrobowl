@@ -9,6 +9,10 @@ Programa de preguntas para la selección del equipo nacional
 
 ![cargar preguntas](https://github.com/yeisonvirtual/spe-petrobowl/blob/main/imagenes/2.JPG)
 
+# Formato del documento Excel a cargar:
+
+![formato](https://github.com/yeisonvirtual/spe-petrobowl/blob/main/imagenes/formato.JPG)
+
 # Nombre de participantes:
 
 ![participantes](https://github.com/yeisonvirtual/spe-petrobowl/blob/main/imagenes/3.JPG)
