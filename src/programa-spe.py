@@ -13,7 +13,7 @@ class programa_spe:
         self.root = Tk()
         self.root.title("Programa SPE")
         self.root.config(bg="#1c3f95")
-        self.root.iconbitmap("C:\\Users\\Usuario\\Desktop\\programa-spe\\src\\logo.ico")
+        self.root.iconbitmap("logo.ico")
 
         ancho = 850
         alto = 500
@@ -66,11 +66,11 @@ class programa_spe:
         #-------------backgraund and geometry--------------#
         self.frame_inicio.config(bg="#1c3f95")
 
-        self.logo_spe = PhotoImage(file="C:\\Users\\Usuario\\Desktop\\programa-spe\\src\\logo-spe.png")
+        self.logo_spe = PhotoImage(file="logo-spe.png")
         label_spe = Label(self.frame_inicio, image=self.logo_spe, background="#1c3f95")
         label_spe.grid(row=0, column=0, padx=30, rowspan=4)
 
-        self.logo_petro = PhotoImage(file="C:\\Users\\Usuario\\Desktop\\programa-spe\\src\\logo-petrobowl.png")
+        self.logo_petro = PhotoImage(file="logo-petrobowl.png")
         label_petro = Label(self.frame_inicio, image=self.logo_petro, background="#1c3f95")
         label_petro.grid(row=0, column=2, padx=30, rowspan=4)
 
