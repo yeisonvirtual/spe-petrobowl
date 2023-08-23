@@ -1,6 +1,9 @@
 # spe-petrobowl
 Programa de preguntas para la selección del equipo nacional
 
+# Video del funcionamiento:
+https://www.youtube.com/watch?v=ExyBj8jxOdA
+
 # Vista principal:
 
 ![principal](https://github.com/yeisonvirtual/spe-petrobowl/blob/main/imagenes/1.JPG)
