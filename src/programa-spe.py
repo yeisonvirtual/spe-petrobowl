@@ -535,6 +535,8 @@ class programa_spe:
         self.frame_puntuacion.place_forget()
         self.frame_inicio.place(anchor="c", relx=.5, rely=.5)
         self.root.bind("<Key-Return>", lambda _: self.comenzar_juego())
+        self.p1.set("")
+        self.p2.set("")
 
 
 app = programa_spe()
