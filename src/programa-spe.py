@@ -1,9 +1,6 @@
 from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
-
-import time
-
 import openpyxl
 import random
 
