@@ -16,7 +16,7 @@ https://www.youtube.com/watch?v=0ZnwPOJbdLc
 
 ![formato](https://github.com/yeisonvirtual/spe-petrobowl/blob/main/imagenes/formato.JPG)
 
-# Nombre de participantes:
+# Datos de la ronda:
 
 ![participantes](https://github.com/yeisonvirtual/spe-petrobowl/blob/main/imagenes/3.JPG)
 
