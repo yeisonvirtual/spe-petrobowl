@@ -18,7 +18,7 @@ https://www.youtube.com/watch?v=0ZnwPOJbdLc
 
 # Datos de la ronda:
 
-![participantes](https://github.com/yeisonvirtual/spe-petrobowl/blob/main/imagenes/3.JPG)
+![datos](https://github.com/yeisonvirtual/spe-petrobowl/blob/main/imagenes/3.JPG)
 
 # Ronda de preguntas:
 
