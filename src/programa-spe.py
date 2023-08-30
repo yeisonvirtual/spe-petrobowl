@@ -29,14 +29,14 @@ class programa_spe:
         #----------------frames-------------------#
         self.frame_inicio = Frame(self.root)
         self.frame_cargar = Frame(self.root)
-        self.frame_participantes = Frame(self.root)
+        self.frame_datos = Frame(self.root)
         self.frame_preguntas = Frame(self.root)
         self.frame_puntuacion = Frame(self.root)
 
         #-------------create widgets--------------#
         self.widgets_inicio()
         self.widgets_cargar()
-        self.widgets_participante()
+        self.widgets_datos()
         self.widgets_preguntas()
         self.widgets_puntuacion()
 
@@ -103,18 +103,13 @@ class programa_spe:
         #----------------------labels----------------------#
         label_cargar = Label(self.frame_cargar, text="Cargar preguntas", fg="#ffffff", background=self.bg, font=("Monotype Corsiva", 45))
         label_cargar.grid(row=0, column=0, pady=10, columnspan=6)
-        label_cantidad = Label(self.frame_cargar, text="Cantidad de preguntas", fg="#ffffff", background=self.bg, font=("Monotype Corsiva", 20))
-        label_cantidad.grid(row=2, column=0, pady=10, columnspan=5)
 
         #----------------------entry-----------------------#
         self.direccion = StringVar()
         self.direccion.set("")
-        self.c_preguntas = StringVar()
 
         self.entry_direccion = Entry(self.frame_cargar, width=50, font=(self.font_text, 12), state="disabled", textvariable=self.direccion)
         self.entry_direccion.grid(row=1, column=0, padx=10, pady=10)
-        self.entry_cantidad = Entry(self.frame_cargar, width=3, font=(self.font, 12), justify="center", textvariable=self.c_preguntas)
-        self.entry_cantidad.grid(row=3, column=0, pady=10, columnspan=5)
 
         #----------------------buttons---------------------#
         cargar = Button(self.frame_cargar, text="Cargar", font=(self.font, 10), command=self.cargar_preguntas)
@@ -127,33 +122,43 @@ class programa_spe:
         volver.grid(row=5, column=0, pady=10, columnspan=5)
 
     
-    def widgets_participante(self):
+    def widgets_datos(self):
 
-        self.frame_participantes.config(bg=self.bg)
+        self.frame_datos.config(bg=self.bg)
 
-        label_participantes = Label(self.frame_participantes, text="Participantes", fg="#ffffff", background=self.bg, font=("Monotype Corsiva", 55))
+        label_participantes = Label(self.frame_datos, text="Datos de la ronda", fg="#ffffff", background=self.bg, font=("Monotype Corsiva", 55))
         label_participantes.grid(row=0, column=0, pady=5)
 
         self.p1 = StringVar(value="")
         self.p2 = StringVar(value="")
 
-        label_participante_1 = Label(self.frame_participantes, text="Participante 1:", fg="#ffffff", background=self.bg, font=(self.font_text, 15))
+        label_participante_1 = Label(self.frame_datos, text="Participante 1:", fg="#ffffff", background=self.bg, font=(self.font_text, 15))
         label_participante_1.grid(row=1, column=0)
 
-        entry_participante_1 = Entry(self.frame_participantes, width=20, textvariable=self.p1, font=("Arial", 15))
+        entry_participante_1 = Entry(self.frame_datos, width=20, textvariable=self.p1, font=("Arial", 15))
         entry_participante_1.grid(row=2, column=0, pady=10)
 
-        label_participante_1 = Label(self.frame_participantes, text="Participante 2:", fg="#ffffff", background=self.bg, font=(self.font_text, 15))
+        label_participante_1 = Label(self.frame_datos, text="Participante 2:", fg="#ffffff", background=self.bg, font=(self.font_text, 15))
         label_participante_1.grid(row=3, column=0)
 
-        entry_participante_2 = Entry(self.frame_participantes, width=20, textvariable=self.p2, font=(self.font_text, 15))
+        entry_participante_2 = Entry(self.frame_datos, width=20, textvariable=self.p2, font=(self.font_text, 15))
         entry_participante_2.grid(row=4, column=0, pady=10)
 
-        self.comenzar_ronda = Button(self.frame_participantes, text="Comenzar ronda", font=(self.font, 12), command=self.iniciar_ronda)
-        self.comenzar_ronda.grid(row=5, column=0, pady=10)
 
-        volver = Button(self.frame_participantes, text="Volver", font=(self.font, 12), command=self.volver_cargar)
-        volver.grid(row=6, column=0, pady=10)
+        self.c_preguntas = StringVar()
+
+        label_cantidad = Label(self.frame_datos, text="Cantidad de preguntas", fg="#ffffff", background=self.bg, font=("Monotype Corsiva", 20))
+        label_cantidad.grid(row=5, column=0, pady=10, columnspan=5)
+
+        self.entry_cantidad = Entry(self.frame_datos, width=3, font=(self.font, 12), justify="center", textvariable=self.c_preguntas)
+        self.entry_cantidad.grid(row=6, column=0, pady=10, columnspan=5)
+
+
+        self.comenzar_ronda = Button(self.frame_datos, text="Comenzar ronda", font=(self.font, 12), command=self.iniciar_ronda)
+        self.comenzar_ronda.grid(row=7, column=0, pady=10)
+
+        volver = Button(self.frame_datos, text="Volver", font=(self.font, 12), command=self.volver_cargar)
+        volver.grid(row=8, column=0, pady=10)
 
 
     def widgets_preguntas(self):
@@ -163,20 +168,20 @@ class programa_spe:
 
         #---------------------labels-----------------------#
         label_p1 = Label(self.frame_preguntas, textvariable=self.p1, fg="#ffffff", background=self.bg, font=(self.font, 30))
-        label_p1.grid(row=0, column=0, padx=50, pady=10)
+        label_p1.grid(row=0, column=0, padx=5, pady=10, sticky="e")
 
         label_p2 = Label(self.frame_preguntas, textvariable=self.p2, fg="#ffffff", background=self.bg, font=(self.font, 30))
-        label_p2.grid(row=0, column=3, padx=50, pady=10)
+        label_p2.grid(row=0, column=3, padx=5, pady=10, sticky="w")
         
         self.tiempo = IntVar(value="")
 
         self.label_tiempo = Label(self.frame_preguntas, background=self.bg, fg="#ffffff", font=(self.font, 30), textvariable=self.tiempo)
-        self.label_tiempo.grid(row=0, column=0, columnspan=4)
+        self.label_tiempo.grid(row=0, column=1, columnspan=2)
 
         self.label_pregunta = Label(self.frame_preguntas, text="Pregunta:", fg="#ffffff", background=self.bg, font=(self.font_text, 20))
-        self.label_pregunta.grid(row=1, column=0, padx=10, sticky="e")
+        self.label_pregunta.grid(row=1, column=0, padx=5, sticky="e")
         self.label_respuesta = Label(self.frame_preguntas, text="Respuesta:", fg="#ffffff", background=self.bg, font=(self.font_text, 20))
-        self.label_respuesta.grid(row=2, column=0, padx=10, sticky="e")
+        self.label_respuesta.grid(row=2, column=0, padx=5, sticky="e")
 
         #---------------------entrys-----------------------#
         self.pregunta = StringVar()
@@ -198,21 +203,21 @@ class programa_spe:
 
         #---------------------buttons-----------------------#
         self.responder_1 = Button(self.frame_preguntas, text="Responder 1", font=(self.font, 10), command= lambda: self.temporizador(0))
-        self.responder_1.grid(row=3, column=0, pady=10, columnspan=3)
+        self.responder_1.grid(row=3, column=1, pady=10, sticky="w")
 
         self.responder_2 = Button(self.frame_preguntas, text="Responder 2", font=(self.font, 10), command= lambda: self.temporizador(1))
-        self.responder_2.grid(row=3, column=1, pady=10, columnspan=3)
+        self.responder_2.grid(row=3, column=1, pady=10, sticky="e")
 
         self.correcto = Button(self.frame_preguntas, text="Correcto", font=(self.font, 10), command=self.r_correcta)
-        self.correcto.grid(row=4, column=0, columnspan=4)
+        self.correcto.grid(row=4, column=1)
 
         self.incorrecto = Button(self.frame_preguntas, text="Incorrecto", font=(self.font, 10), command=self.r_incorrecta)
-        self.incorrecto.grid(row=5, column=0, pady=10, columnspan=4)
+        self.incorrecto.grid(row=5, column=1, pady=10)
 
         omitir = Button(self.frame_preguntas, text="Omitir", font=(self.font, 10), command=self.siguiente)
-        omitir.grid(row=6, column=0, pady=10, columnspan=4)
+        omitir.grid(row=6, column=1, pady=10)
 
-        volver = Button(self.frame_preguntas, text="Volver", font=(self.font, 10), command=self.volver_participantes)
+        volver = Button(self.frame_preguntas, text="Volver", font=(self.font, 10), command=self.volver_datos)
         volver.grid(row=6, column=0)
 
     
@@ -252,9 +257,10 @@ class programa_spe:
     #----------------functions frame inicio-----------------------#
 
     def comenzar_juego(self):
+        #------Se cambia el frame------#
         self.frame_inicio.place_forget()
         self.frame_cargar.place(anchor="c", relx=.5, rely=.5)
-        self.root.bind("<KeyRelease>", lambda _: self.validar_entero())
+
 
     def acerca_de(self):
         messagebox.showinfo("Información adicional", "Desarrollador: Yeison Rojas.\nPrograma para la seleccion del equipo nacional.\nVersión: 1.0\nPrograma bajo licencia MIT")
@@ -269,6 +275,48 @@ class programa_spe:
         self.direccion.set(fichero)
 
         self.activar_iniciar()
+    
+    
+    def activar_iniciar(self):
+        
+        if self.direccion.get() != "":
+            self.iniciar.config(state=ACTIVE)
+        
+        else:
+            self.iniciar.config(state=DISABLED)
+
+    
+    def cargar_participantes(self):
+
+        #------Se extraen los datos del archivo-----#
+        datos = self.leer_archivo()
+
+        self.preguntas = datos[0]
+        self.respuestas = datos[1]
+        
+        #------Se limpian los campos de los participantes-----#
+        self.p1.set("")
+        self.p2.set("")
+        
+        #------Se dehabilita el acceso rapido de la tecla Enter-----#
+        self.root.bind("<Key-Return>", lambda _: ())
+        
+        #------Se habilita la lectura de todas las entradas del teclado para validar la cantidad de preguntas-----#
+        self.root.bind("<KeyRelease>", lambda _: self.validar_entero())
+
+        #-------Se dehabilita el boton de comenzar ronda-------#
+        self.comenzar_ronda.config(state=DISABLED)
+
+        #------Se cambia el frame------#
+        self.frame_cargar.place_forget()
+        self.frame_datos.place(anchor="c", relx=.5, rely=.5)
+
+    
+    def volver_inicio(self):
+        self.frame_cargar.place_forget()
+        self.frame_inicio.place(anchor="c", relx=.5, rely=.5)
+    
+    #----------------functions frame participantes-----------------------#
 
     #------valida si la cantidad de preguntas es un numero entero---------#
     def validar_entero(self):
@@ -279,55 +327,28 @@ class programa_spe:
             if i not in '0123456789':
                 self.entry_cantidad.delete(codigo.index(i), codigo.index(i)+1)
 
-        self.activar_iniciar()
+        self.activar_comenzar()
     
-    
-    def activar_iniciar(self):
-        if self.direccion.get() != "" and self.c_preguntas.get() != "":
+
+    def activar_comenzar(self):
+
+        self.comenzar_ronda.config(state=DISABLED)
+        
+        if self.p1.get() != "" and self.p2.get() != "" and self.c_preguntas.get() != "":
             
             cantidad = int(self.c_preguntas.get())
 
             if cantidad > 4:
-                self.iniciar.config(state=ACTIVE)
+                self.comenzar_ronda.config(state=ACTIVE)
             else:
-                self.iniciar.config(state=DISABLED)
-        
-        else:
-            self.iniciar.config(state=DISABLED)
-
-    def cargar_participantes(self):
-
-        #------Se extraen los datos del archivo-----#
-        datos = self.leer_archivo()
-
-        self.preguntas = datos[0]
-        self.respuestas = datos[1]
-
-        self.frame_cargar.place_forget()
-        self.frame_participantes.place(anchor="c", relx=.5, rely=.5)
-        
-        self.root.bind("<Key-Return>", lambda _: ())
-        self.root.bind("<KeyRelease>", lambda _: self.validar_participantes())
-        self.comenzar_ronda.config(state=DISABLED)
+                self.comenzar_ronda.config(state=DISABLED)
 
     
-    def volver_inicio(self):
-        self.frame_cargar.place_forget()
-        self.frame_inicio.place(anchor="c", relx=.5, rely=.5)
-    
-    #----------------functions frame participantes-----------------------#
-    def validar_participantes(self):
-        
-        if self.p1.get() == "" or self.p2.get() == "":
-            self.comenzar_ronda.config(state=DISABLED)
-        else:
-            self.comenzar_ronda.config(state=ACTIVE)
-
     def iniciar_ronda(self):
-        self.frame_participantes.place_forget()
-        self.frame_preguntas.place(anchor="c", relx=.5, rely=.5)
-        self.root.bind("<KeyRelease>", lambda _: ())
         
+        #------Se dehabilita la lectura de todas las entradas del teclado-------#
+        self.root.bind("<KeyRelease>", lambda _: ())
+
         #------------------acceso directo con el teclado-------------------#
 
         #----------------Left para participante #1 y Right para participante #2----------------#
@@ -351,11 +372,17 @@ class programa_spe:
         self.contador = 0
         self.n_participante = None
         
+        #------Se genera el numero aleatoria para extraer una pregunta------#
         self.n = random.randint(0, len(self.preguntas)-1)
 
+        #----Se extrae la pregunta-----#
         p = self.preguntas.pop(self.n)
         r = self.respuestas.pop(self.n)
+
+        #----Se aumenta el contador de preguntas----#
+        self.contador +=1
         
+        #------Valores necesarios para el temporizador-----#
         self.tmp = False
         self.tiempo.set("")
 
@@ -368,10 +395,14 @@ class programa_spe:
         self.text_pregunta.config(state="disabled")
         self.text_respuesta.config(state="disabled")
 
-        self.contador +=1
+        #------Se cambia el frame------#
+        self.frame_datos.place_forget()
+        self.frame_preguntas.place(anchor="c", relx=.5, rely=.5)
 
+    
     def volver_cargar(self):
-        self.frame_participantes.place_forget()
+        #------Se cambia el frame------#
+        self.frame_datos.place_forget()
         self.frame_cargar.place(anchor="c", relx=.5, rely=.5)
 
 
@@ -497,8 +528,6 @@ class programa_spe:
             self.text_respuesta.config(state="disabled")
 
         else:
-            self.frame_preguntas.place_forget()
-            self.frame_puntuacion.place(anchor="c", relx=.5, rely=.5)
 
             #----------------Desactiva el acceso rapido desde el teclado----------------#
             self.root.bind("<Key-Return>", lambda _: ())
@@ -511,6 +540,10 @@ class programa_spe:
             
             self.label_puntos_1.config(text=self.puntos[0])
             self.label_puntos_2.config(text=self.puntos[1])
+
+            #------Se cambia el frame------#
+            self.frame_preguntas.place_forget()
+            self.frame_puntuacion.place(anchor="c", relx=.5, rely=.5)
 
 
     def leer_archivo(self):
@@ -541,10 +574,17 @@ class programa_spe:
         return [preguntas, respuestas]
 
     
-    def volver_participantes(self):
+    def volver_datos(self):
+
+        #----Se habilita la lectura de todas las entradas del teclado----#
+        self.root.bind("<KeyRelease>", lambda _: self.validar_entero())
+
+        self.p1.set("")
+        self.p2.set("")
+
+        #------Se cambia el frame------#
         self.frame_preguntas.place_forget()
-        self.frame_participantes.place(anchor="c", relx=.5, rely=.5)
-        self.root.bind("<KeyRelease>", lambda _: self.validar_participantes())
+        self.frame_datos.place(anchor="c", relx=.5, rely=.5)
     
     
     #----------------functions frame puntuacion-----------------------#
@@ -556,11 +596,11 @@ class programa_spe:
             
         else:
             self.frame_puntuacion.place_forget()
-            self.frame_participantes.place(anchor="c", relx=.5, rely=.5)
+            self.frame_datos.place(anchor="c", relx=.5, rely=.5)
         
             self.p1.set("")
             self.p2.set("")
-            self.root.bind("<KeyRelease>", lambda _: self.validar_participantes())
+            self.root.bind("<KeyRelease>", lambda _: self.validar_entero())
             self.comenzar_ronda.config(state=DISABLED)
 
     
