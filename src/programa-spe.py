@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
+
 import openpyxl
 import random
 
@@ -9,11 +10,16 @@ class programa_spe:
     def __init__(self):
         self.root = Tk()
         self.root.title("Programa SPE")
-        self.root.config(bg="#1c3f95")
         self.root.iconbitmap("logo.ico")
 
-        ancho = 850
-        alto = 500
+        self.bg = "#0c75b7"
+        self.root.config(bg=self.bg)
+        
+        self.font = "Arial Black"
+        self.font_text = "Aerial"
+
+        ancho = 1000
+        alto = 600
 
         #----------------colocar al centro de la pantalla-------------------#
         self.centrar_interfaz(ancho, alto)
@@ -61,40 +67,43 @@ class programa_spe:
 
     def widgets_inicio(self):
         #-------------backgraund and geometry--------------#
-        self.frame_inicio.config(bg="#1c3f95")
-
-        self.logo_spe = PhotoImage(file="logo-spe.png")
-        label_spe = Label(self.frame_inicio, image=self.logo_spe, background="#1c3f95")
-        label_spe.grid(row=0, column=0, padx=30, rowspan=4)
+        self.frame_inicio.config(bg="#0c75b7")
 
         self.logo_petro = PhotoImage(file="logo-petrobowl.png")
-        label_petro = Label(self.frame_inicio, image=self.logo_petro, background="#1c3f95")
-        label_petro.grid(row=0, column=2, padx=30, rowspan=4)
+        label_petro = Label(self.frame_inicio, image=self.logo_petro, background=self.bg)
+        label_petro.grid(row=0, column=0, padx=30, columnspan=3)
+
+        self.logo_spe = PhotoImage(file="logo-spe.png")
+        label_spe = Label(self.frame_inicio, image=self.logo_spe, background=self.bg)
+        label_spe.grid(row=0, column=0, padx=30, rowspan=5)
+
+        self.logo_udo = PhotoImage(file="logo-udo.png")
+        label_udo = Label(self.frame_inicio, image=self.logo_udo, background=self.bg)
+        label_udo.grid(row=0, column=2, padx=30, rowspan=5)
 
         #---------------------labels-----------------------#
-        label_bienvenidos = Label(self.frame_inicio, text="Bienvenidos", fg="#ffffff", background="#1c3f95", font=("Cooper Black", 35))
-        label_bienvenidos.grid(row=0, column=1, padx=10, pady=10)
+        label_bienvenidos = Label(self.frame_inicio, text="Bienvenidos", fg="#ffffff", background=self.bg, font=("Monotype Corsiva", 55))
+        label_bienvenidos.grid(row=1, column=1, padx=10, pady=60)
 
         #---------------------buttons-----------------------#
-        self.comenzar = Button(self.frame_inicio, text="Comenzar", font=("Cooper Black", 12), command=self.comenzar_juego)
-        self.comenzar.grid(row=1, column=1, padx=10, pady=10)
-        self.root.bind("<Key-Return>", lambda _: self.comenzar_juego())
+        self.comenzar = Button(self.frame_inicio, text="Comenzar", font=(self.font, 12), command=self.comenzar_juego)
+        self.comenzar.grid(row=2, column=1, padx=10, pady=10)
 
-        acerca = Button(self.frame_inicio, text="Acerca de", font=("Cooper Black", 12), command=self.acerca_de)
-        acerca.grid(row=2, column=1, padx=10, pady=10)
+        acerca = Button(self.frame_inicio, text="Acerca de", font=(self.font, 12), command=self.acerca_de)
+        acerca.grid(row=3, column=1, padx=10, pady=10)
 
-        salir = Button(self.frame_inicio, text="Salir", font=("Cooper Black", 12), command=self.salir_programa)
-        salir.grid(row=3, column=1, padx=10, pady=10)
+        salir = Button(self.frame_inicio, text="Salir", font=(self.font, 12), command=self.salir_programa)
+        salir.grid(row=4, column=1, padx=10, pady=10)
 
     
     def widgets_cargar(self):
         #-------------backgraund and geometry--------------#
-        self.frame_cargar.config(bg="#1c3f95")
+        self.frame_cargar.config(bg=self.bg)
 
         #----------------------labels----------------------#
-        label_cargar = Label(self.frame_cargar, text="Cargar preguntas", fg="#ffffff", background="#1c3f95", font=("Cooper Black", 35))
+        label_cargar = Label(self.frame_cargar, text="Cargar preguntas", fg="#ffffff", background=self.bg, font=("Monotype Corsiva", 45))
         label_cargar.grid(row=0, column=0, pady=10, columnspan=6)
-        label_cantidad = Label(self.frame_cargar, text="Cantidad de preguntas", fg="#ffffff", background="#1c3f95", font=("Cooper Black", 12))
+        label_cantidad = Label(self.frame_cargar, text="Cantidad de preguntas", fg="#ffffff", background=self.bg, font=("Monotype Corsiva", 20))
         label_cantidad.grid(row=2, column=0, pady=10, columnspan=5)
 
         #----------------------entry-----------------------#
@@ -102,137 +111,140 @@ class programa_spe:
         self.direccion.set("")
         self.c_preguntas = StringVar()
 
-        self.entry_direccion = Entry(self.frame_cargar, width=50, font=("Cooper Black", 10), state="disabled", textvariable=self.direccion)
+        self.entry_direccion = Entry(self.frame_cargar, width=50, font=(self.font_text, 12), state="disabled", textvariable=self.direccion)
         self.entry_direccion.grid(row=1, column=0, padx=10, pady=10)
-        self.entry_cantidad = Entry(self.frame_cargar, width=3, font=("Cooper Black", 10), justify="center", textvariable=self.c_preguntas)
+        self.entry_cantidad = Entry(self.frame_cargar, width=3, font=(self.font, 12), justify="center", textvariable=self.c_preguntas)
         self.entry_cantidad.grid(row=3, column=0, pady=10, columnspan=5)
 
         #----------------------buttons---------------------#
-        cargar = Button(self.frame_cargar, text="Cargar", font=("Cooper Black", 10), command=self.cargar_preguntas)
+        cargar = Button(self.frame_cargar, text="Cargar", font=(self.font, 10), command=self.cargar_preguntas)
         cargar.grid(row=1, column=2, padx=10, pady=10, columnspan=5)
 
-        self.iniciar = Button(self.frame_cargar, text="Iniciar", font=("Cooper Black", 10), command=self.cargar_participantes, state=DISABLED)
+        self.iniciar = Button(self.frame_cargar, text="Iniciar", font=(self.font, 10), command=self.cargar_participantes, state=DISABLED)
         self.iniciar.grid(row=4, column=0, pady=10, columnspan=5)
 
-        volver = Button(self.frame_cargar, text="Volver", font=("Cooper Black", 10), command=self.volver_inicio)
+        volver = Button(self.frame_cargar, text="Volver", font=(self.font, 10), command=self.volver_inicio)
         volver.grid(row=5, column=0, pady=10, columnspan=5)
 
     
     def widgets_participante(self):
 
-        self.frame_participantes.config(bg="#1c3f95")
+        self.frame_participantes.config(bg=self.bg)
 
-        label_bienvenidos = Label(self.frame_participantes, text="Participantes", fg="#ffffff", background="#1c3f95", font=("Cooper Black", 35))
-        label_bienvenidos.grid(row=0, column=0, pady=5)
+        label_participantes = Label(self.frame_participantes, text="Participantes", fg="#ffffff", background=self.bg, font=("Monotype Corsiva", 55))
+        label_participantes.grid(row=0, column=0, pady=5)
 
         self.p1 = StringVar(value="")
         self.p2 = StringVar(value="")
 
-        label_participante_1 = Label(self.frame_participantes, text="Participante 1:", fg="#ffffff", background="#1c3f95", font=("Cooper Black", 12))
+        label_participante_1 = Label(self.frame_participantes, text="Participante 1:", fg="#ffffff", background=self.bg, font=(self.font_text, 15))
         label_participante_1.grid(row=1, column=0)
 
-        entry_participante_1 = Entry(self.frame_participantes, width=20, textvariable=self.p1, font=("Cooper Black", 10))
+        entry_participante_1 = Entry(self.frame_participantes, width=20, textvariable=self.p1, font=("Arial", 15))
         entry_participante_1.grid(row=2, column=0, pady=10)
 
-        label_participante_1 = Label(self.frame_participantes, text="Participante 2:", fg="#ffffff", background="#1c3f95", font=("Cooper Black", 12))
+        label_participante_1 = Label(self.frame_participantes, text="Participante 2:", fg="#ffffff", background=self.bg, font=(self.font_text, 15))
         label_participante_1.grid(row=3, column=0)
 
-        entry_participante_2 = Entry(self.frame_participantes, width=20, textvariable=self.p2, font=("Cooper Black", 10))
+        entry_participante_2 = Entry(self.frame_participantes, width=20, textvariable=self.p2, font=(self.font_text, 15))
         entry_participante_2.grid(row=4, column=0, pady=10)
 
-        self.comenzar_ronda = Button(self.frame_participantes, text="Comenzar ronda", font=("Cooper Black", 12), command=self.iniciar_ronda)
+        self.comenzar_ronda = Button(self.frame_participantes, text="Comenzar ronda", font=(self.font, 12), command=self.iniciar_ronda)
         self.comenzar_ronda.grid(row=5, column=0, pady=10)
 
-        volver = Button(self.frame_participantes, text="Volver", font=("Cooper Black", 12), command=self.volver_cargar)
+        volver = Button(self.frame_participantes, text="Volver", font=(self.font, 12), command=self.volver_cargar)
         volver.grid(row=6, column=0, pady=10)
 
 
     def widgets_preguntas(self):
 
         #-------------backgraund and geometry--------------#
-        self.frame_preguntas.config(bg="#1c3f95")
+        self.frame_preguntas.config(bg=self.bg)
 
         #---------------------labels-----------------------#
-        label_p1 = Label(self.frame_preguntas, textvariable=self.p1, fg="#ffffff", background="#1c3f95", font=("Cooper Black", 25))
-        label_p1.grid(row=0, column=0, pady=10)
+        label_p1 = Label(self.frame_preguntas, textvariable=self.p1, fg="#ffffff", background=self.bg, font=(self.font, 30))
+        label_p1.grid(row=0, column=0, padx=50, pady=10)
 
-        label_p2 = Label(self.frame_preguntas, textvariable=self.p2, fg="#ffffff", background="#1c3f95", font=("Cooper Black", 25))
-        label_p2.grid(row=0, column=3, pady=10)
+        label_p2 = Label(self.frame_preguntas, textvariable=self.p2, fg="#ffffff", background=self.bg, font=(self.font, 30))
+        label_p2.grid(row=0, column=3, padx=50, pady=10)
         
         self.tiempo = IntVar(value="")
 
-        self.label_tiempo = Label(self.frame_preguntas, background="#1c3f95", fg="#ffffff", font=("Cooper Black", 14), textvariable=self.tiempo)
+        self.label_tiempo = Label(self.frame_preguntas, background=self.bg, fg="#ffffff", font=(self.font, 30), textvariable=self.tiempo)
         self.label_tiempo.grid(row=0, column=0, columnspan=4)
 
-        self.label_pregunta = Label(self.frame_preguntas, text="Preguntas:", fg="#ffffff", background="#1c3f95", font=("Cooper Black", 14))
+        self.label_pregunta = Label(self.frame_preguntas, text="Pregunta:", fg="#ffffff", background=self.bg, font=(self.font_text, 20))
         self.label_pregunta.grid(row=1, column=0, padx=10, sticky="e")
-        self.label_respuesta = Label(self.frame_preguntas, text="Respuestas:", fg="#ffffff", background="#1c3f95", font=("Cooper Black", 14))
+        self.label_respuesta = Label(self.frame_preguntas, text="Respuesta:", fg="#ffffff", background=self.bg, font=(self.font_text, 20))
         self.label_respuesta.grid(row=2, column=0, padx=10, sticky="e")
 
         #---------------------entrys-----------------------#
         self.pregunta = StringVar()
         self.pregunta.set("")
 
-        self.text_pregunta = Text(self.frame_preguntas, width=50, height=5, font=("Aerial", 12), state="disabled")
+        self.text_pregunta = Text(self.frame_preguntas, width=50, height=5, font=(self.font_text, 12), state="disabled")
         self.text_pregunta.grid(row=1, column=1, pady=10)
         
         scroll_pregunta = Scrollbar(self.frame_preguntas, command=self.text_pregunta.yview)
         scroll_pregunta.grid(row=1, column=2, sticky="nsew", pady=10)
         self.text_pregunta.config(yscrollcommand=scroll_pregunta.set)
 
-        self.text_respuesta = Text(self.frame_preguntas, width=50, height=5, font=("Aerial", 12), state="disabled")
-        self.text_respuesta.grid(row=2, column=1, pady=10)
+        self.text_respuesta = Text(self.frame_preguntas, width=50, height=5, font=(self.font_text, 12), state="disabled")
+        self.text_respuesta.grid(row=2, column=1, pady=20)
         
         scroll_respuesta = Scrollbar(self.frame_preguntas, command=self.text_pregunta.yview)
-        scroll_respuesta.grid(row=2, column=2, sticky="nsew", pady=10)
+        scroll_respuesta.grid(row=2, column=2, sticky="nsew", pady=20)
         self.text_respuesta.config(yscrollcommand=scroll_respuesta.set)
 
         #---------------------buttons-----------------------#
-        self.responder_1 = Button(self.frame_preguntas, text="Responder 1", font=("Cooper Black", 10), command= lambda: self.temporizador(0))
-        self.responder_1.grid(row=3, column=0, columnspan=4)
+        self.responder_1 = Button(self.frame_preguntas, text="Responder 1", font=(self.font, 10), command= lambda: self.temporizador(0))
+        self.responder_1.grid(row=3, column=0, pady=10, columnspan=3)
 
-        self.responder_2 = Button(self.frame_preguntas, text="Responder 2", font=("Cooper Black", 10), command= lambda: self.temporizador(1))
-        self.responder_2.grid(row=4, column=0, pady=10, columnspan=4)
+        self.responder_2 = Button(self.frame_preguntas, text="Responder 2", font=(self.font, 10), command= lambda: self.temporizador(1))
+        self.responder_2.grid(row=3, column=1, pady=10, columnspan=3)
 
-        self.correcto = Button(self.frame_preguntas, text="Correcto", font=("Cooper Black", 10), command=self.r_correcta)
-        self.correcto.grid(row=5, column=0, columnspan=4)
+        self.correcto = Button(self.frame_preguntas, text="Correcto", font=(self.font, 10), command=self.r_correcta)
+        self.correcto.grid(row=4, column=0, columnspan=4)
 
-        self.incorrecto = Button(self.frame_preguntas, text="Incorrecto", font=("Cooper Black", 10), command=self.r_incorrecta)
-        self.incorrecto.grid(row=6, column=0, pady=10, columnspan=4)
+        self.incorrecto = Button(self.frame_preguntas, text="Incorrecto", font=(self.font, 10), command=self.r_incorrecta)
+        self.incorrecto.grid(row=5, column=0, pady=10, columnspan=4)
 
-        omitir = Button(self.frame_preguntas, text="Omitir", font=("Cooper Black", 10), command=self.siguiente)
-        omitir.grid(row=7, column=0, pady=10, columnspan=4)
+        omitir = Button(self.frame_preguntas, text="Omitir", font=(self.font, 10), command=self.siguiente)
+        omitir.grid(row=6, column=0, pady=10, columnspan=4)
 
-        volver = Button(self.frame_preguntas, text="Volver", font=("Cooper Black", 10), command=self.volver_participantes)
-        volver.grid(row=7, column=0)
+        volver = Button(self.frame_preguntas, text="Volver", font=(self.font, 10), command=self.volver_participantes)
+        volver.grid(row=6, column=0)
 
     
     def widgets_puntuacion(self):
         #-------------backgraund and geometry--------------#
-        self.frame_puntuacion.config(bg="#1c3f95")
+        self.frame_puntuacion.config(bg=self.bg)
 
         #---------------------labels-----------------------#
-        label_puntuacion = Label(self.frame_puntuacion, text="Ronda ha terminado", fg="#ffffff", background="#1c3f95", font=("Cooper Black", 25))
+        label_puntuacion = Label(self.frame_puntuacion, text="Ronda ha terminado", fg="#ffffff", background=self.bg, font=(self.font, 45))
         label_puntuacion.grid(row=0, column=0, pady=10, columnspan=2)
 
-        label_puntuacion = Label(self.frame_puntuacion, text="Puntuación final:", fg="#ffffff", background="#1c3f95", font=("Cooper Black", 25))
+        label_puntuacion = Label(self.frame_puntuacion, text="Puntuación final:", fg="#ffffff", background=self.bg, font=(self.font, 25))
         label_puntuacion.grid(row=1, column=0, pady=10, columnspan=2)
 
-        label_p1 = Label(self.frame_puntuacion, textvariable=self.p1, fg="#ffffff", background="#1c3f95", font=("Cooper Black", 25))
+        label_p1 = Label(self.frame_puntuacion, textvariable=self.p1, fg="#ffffff", background=self.bg, font=(self.font, 25))
         label_p1.grid(row=2, column=0, padx=50, pady=10)
 
-        self.label_puntos_1 = Label(self.frame_puntuacion, background="#1c3f95", fg="#ffffff", font=("Cooper Black", 25))
+        self.label_puntos_1 = Label(self.frame_puntuacion, background=self.bg, fg="#ffffff", font=(self.font, 25))
         self.label_puntos_1.grid(row=3, column=0, pady=10)
 
-        label_p2 = Label(self.frame_puntuacion, textvariable=self.p2, fg="#ffffff", background="#1c3f95", font=("Cooper Black", 25))
+        label_p2 = Label(self.frame_puntuacion, textvariable=self.p2, fg="#ffffff", background=self.bg, font=(self.font, 25))
         label_p2.grid(row=2, column=1, padx=50, pady=10)
 
-        self.label_puntos_2 = Label(self.frame_puntuacion, background="#1c3f95", fg="#ffffff", font=("Cooper Black", 25))
+        self.label_puntos_2 = Label(self.frame_puntuacion, background=self.bg, fg="#ffffff", font=(self.font, 25))
         self.label_puntos_2.grid(row=3, column=1, pady=10)
 
         #---------------------buttons-----------------------#
-        salir = Button(self.frame_puntuacion, text="Salir", font=("Cooper Black", 12), command=self.salir_ronda)
-        salir.grid(row=4, column=0, pady=10, columnspan=2)
+        otra_ronda = Button(self.frame_puntuacion, text="Otra ronda", font=(self.font, 12), command=self.otra_ronda)
+        otra_ronda.grid(row=4, column=0, pady=10, columnspan=2)
+
+        salir = Button(self.frame_puntuacion, text="Salir", font=(self.font, 12), command=self.salir_ronda)
+        salir.grid(row=5, column=0, pady=10, columnspan=2)
 
 
     #------------------------functions----------------------------#
@@ -245,7 +257,7 @@ class programa_spe:
         self.root.bind("<KeyRelease>", lambda _: self.validar_entero())
 
     def acerca_de(self):
-        messagebox.showinfo("Información adicional", "Desarrollador: Yeison Rojas.\nPrograma de preguntas SPE en fase de desarrollo.\nVersión: 1.0\nPrograma bajo licencia MIT")
+        messagebox.showinfo("Información adicional", "Desarrollador: Yeison Rojas.\nPrograma para la seleccion del equipo nacional.\nVersión: 1.0\nPrograma bajo licencia MIT")
     
     def salir_programa(self):
         self.root.destroy()
@@ -284,6 +296,13 @@ class programa_spe:
             self.iniciar.config(state=DISABLED)
 
     def cargar_participantes(self):
+
+        #------Se extraen los datos del archivo-----#
+        datos = self.leer_archivo()
+
+        self.preguntas = datos[0]
+        self.respuestas = datos[1]
+
         self.frame_cargar.place_forget()
         self.frame_participantes.place(anchor="c", relx=.5, rely=.5)
         
@@ -318,12 +337,6 @@ class programa_spe:
         #-------Deshabilita los botones de correcto e incorrecto------#
         self.correcto.config(state=DISABLED)
         self.incorrecto.config(state=DISABLED)
-
-
-        datos = self.leer_archivo()
-
-        self.preguntas = datos[0]
-        self.respuestas = datos[1]
 
         #-------Habilita la modificacion de los campos de texto------#
         self.text_pregunta.config(state="normal")
@@ -379,11 +392,13 @@ class programa_spe:
                 self.responder_1.config(state=ACTIVE, background='#f1eff0')
                 self.responder_2.config(state=ACTIVE, background='#f1eff0')
 
-                #----------Desactiva tecla Up para respuesta correcta-----------#
-                self.root.bind("<Key-Up>", lambda _: ())
+                #----------------Left para participante #1 y Right para participante #2----------------#
+                self.root.bind("<Key-Left>", lambda _: self.temporizador(0))
+                self.root.bind("<Key-Right>", lambda _: self.temporizador(1))
 
-                #---------Desactiva tecla Down para respuesta incorrecta--------#
-                self.root.bind("<Key-Down>", lambda _: ())
+                #-------------Activa tecla Up y Down para marcar respuesta correcta o incorrecta---------------#
+                self.root.bind("<Key-Up>", lambda _: self.r_correcta())
+                self.root.bind("<Key-Down>", lambda _: self.r_incorrecta())  
         
         else:
             #-------Habilita los botones de responder y los cambia a su color original------#
@@ -428,7 +443,7 @@ class programa_spe:
         self.root.bind("<Key-Down>", lambda _: self.r_incorrecta())
         
         self.tmp = True
-        self.tiempo.set("16")
+        self.tiempo.set("6")
         self.refrescar()
 
     def r_correcta(self):
@@ -485,7 +500,12 @@ class programa_spe:
             self.frame_preguntas.place_forget()
             self.frame_puntuacion.place(anchor="c", relx=.5, rely=.5)
 
-            self.root.bind("<Key-Return>", lambda _: self.salir_ronda())
+            #----------------Desactiva el acceso rapido desde el teclado----------------#
+            self.root.bind("<Key-Return>", lambda _: ())
+
+            self.root.bind("<Key-Left>", lambda _: ())
+            self.root.bind("<Key-Right>", lambda _: ())
+
             self.root.bind("<Key-Up>", lambda _: ())
             self.root.bind("<Key-Down>", lambda _: ())
             
@@ -528,14 +548,28 @@ class programa_spe:
     
     
     #----------------functions frame puntuacion-----------------------#
+
+    def otra_ronda(self):
+
+        if len(self.preguntas) == 0:
+            self.salir_ronda()
+            
+        else:
+            self.frame_puntuacion.place_forget()
+            self.frame_participantes.place(anchor="c", relx=.5, rely=.5)
+        
+            self.p1.set("")
+            self.p2.set("")
+            self.root.bind("<KeyRelease>", lambda _: self.validar_participantes())
+            self.comenzar_ronda.config(state=DISABLED)
+
+    
     def salir_ronda(self):
         self.frame_puntuacion.place_forget()
         self.frame_inicio.place(anchor="c", relx=.5, rely=.5)
-        self.root.bind("<Key-Return>", lambda _: self.comenzar_juego())
         self.p1.set("")
         self.p2.set("")
 
 
 app = programa_spe()
 app.root.mainloop()
-
