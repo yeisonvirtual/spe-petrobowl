@@ -1,6 +1,5 @@
 from tkinter import *
-from tkinter import filedialog
-from tkinter import messagebox, ttk
+from tkinter import filedialog, messagebox, ttk
 
 import openpyxl
 import random
