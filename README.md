@@ -1,5 +1,5 @@
 # spe-petrobowl
-Programa de preguntas para la selección del equipo nacional
+Programa de preguntas para la selección del equipo nacional del Petrobowl
 
 # Video del funcionamiento:
 https://youtu.be/WJElcnIr0Oc
