@@ -586,10 +586,6 @@ class programa_spe:
         #----Se habilita la lectura de todas las entradas del teclado----#
         self.root.bind("<KeyRelease>", lambda _: self.validar_entero())
 
-        #-----limpia los nombres de los participantes-----#
-        self.p1.set("")
-        self.p2.set("")
-
         #------Se cambia el frame------#
         self.frame_preguntas.place_forget()
         self.frame_datos.place(anchor="c", relx=.5, rely=.5)
