@@ -2,7 +2,7 @@
 Programa de preguntas para la selección del equipo nacional
 
 # Video del funcionamiento:
-(https://youtu.be/WJElcnIr0Oc)
+https://youtu.be/WJElcnIr0Oc
 
 # Vista principal:
 
